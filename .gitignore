@@ -1,1 +1,18 @@
+<<<<<<< HEAD
+=======
+# Exclude test files and directories
+/.vim
+/docs
+deno.lock
+/example.pdf
+/newtest.ts
+/src/index.html
+
+
+.gitignore
+
+# Exclude configuration files
+# .editorconfig
+# .gitignore
+>>>>>>> a977a4c (updated jsr publish)
 
