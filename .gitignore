@@ -1,0 +1,13 @@
+# Exclude test files and directories
+/.vim
+/docs
+deno.lock
+/example.pdf
+/newtest.ts
+/src/index.html
+
+
+# Exclude configuration files
+# .editorconfig
+# .gitignore
+

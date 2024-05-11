@@ -1,0 +1,9 @@
+{
+  "name": "@pdf/pdftext",
+  "version": "1.0.18",
+  "exports": {
+    ".": "./mod.ts",
+    "./pdftext": "./pdftext.ts",
+    "./test": "./test.ts"
+  }
+}
