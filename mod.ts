@@ -1,6 +1,7 @@
 /**
- * # OVERVIEW
+ * # OVERVIEW 
  * ---
+ *
  * \@pdf/pdftext is a simple module to extract text from pdf. It uses mozilla's PDF.js
  *   
  * ## USAGE (Deno) :
@@ -38,7 +39,7 @@
  *
  * ## TEST :
  * ```ts
- * import {test} from '@pdf/pdftext' ;
+ * import {test} from 'jsr:@pdf/pdftext' ;
  * console.log(await test());
  * ```
  *
