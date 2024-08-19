@@ -1,5 +1,3 @@
-# OVERVIEW 
----
 <a href="https://jsr.io/@pdf/pdftext">
   <img src="https://jsr.io/badges/@pdf/pdftext" alt="JSR" />
 </a>
@@ -13,8 +11,8 @@
   - Browser,  
   - Deno.  
 
-## Command-line :
-### <u>i. Deno installed</u>
+# Command-line :
+## <u>i. Deno installed</u>
 1. Install / Update
 ```shell
 deno install -f -r --allow-read --allow-write --allow-net --allow-env jsr:@pdf/pdftext/pdftxt
@@ -28,7 +26,7 @@ pdftxt sample.pdf
 deno uninstall pdftxt
 ```
 
-### <u>ii. Deno not installed</u>
+## <u>ii. Deno not installed</u>
 1. Download appropriate version from [here](https://github.com/tinyCodes1/pdftext/tree/main/Dist).
 
 2. Use
@@ -46,7 +44,7 @@ Open command line in downloaded location.
 ```
 
 
-## Browser :
+# Browser :
 1. Download directly or use a utility like 'wget'
 ```shell
 wget https://jsr.io/@pdf/pdftext/1.0.18/src/pdftext.js
@@ -66,7 +64,7 @@ const page = await pdfText(pdfBuffer);
 <input type="file" id="file-input" />
 ```
 
-## Deno :
+# Deno :
 ```typescript
 import {pdfText} from 'jsr:@pdf/pdftext';
 const pdfBuffer : ArrayBuffer = Deno.readFileSync("./path/to/pdf");
@@ -76,7 +74,7 @@ const page : {[pageno:number]:string} = await pdfText(pdfBuffer);
 ```
 
 
-## TEST :
+# TEST :
 Typescript code for testing purpose.
 ```typescript
 import {test} from 'jsr:@pdf/pdftext' ;
