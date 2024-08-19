@@ -42,13 +42,17 @@ const page = await pdfText(pdfBuffer);
 ## USAGE (Command-line) :
 1. Install / Update
 ```shell
-deno install -r -f --allow-read --allow-write --allow-net --allow-env jsr:@pdf/pdftext/pdftxt
+deno install --allow-read --allow-write --allow-net --allow-env jsr:@pdf/pdftext/pdftxt
 ```
 2. Now you can use it from command line
 ```shell
 pdftxt sample.pdf
 ```
-3. Uninstall
+3. Install / Update
+```shell
+deno install -f --allow-read --allow-write --allow-net --allow-env jsr:@pdf/pdftext/pdftxt
+```
+4. Uninstall
 ```shell
 deno uninstall pdftxt
 ```
