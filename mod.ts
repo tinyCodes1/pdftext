@@ -17,7 +17,7 @@
  * ## USAGE (Browser) :
  * 1. Download directly or using any utility like wget :
  * ```sh
- * wget https://jsr.io/@pdf/pdftext/1.0.18/src/pdftext.js
+ * wget https://jsr.io/@pdf/pdftext/1.0.19/src/pdftext.js
  * ```
  * 2. Minimum webpage
  * ```html
