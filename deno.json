@@ -6,5 +6,9 @@
     "./pdftext": "./pdftext.ts",
     "./test": "./test.ts",
     "./pdftxt": "./pdftxt.ts"
+  },
+"imports": {
+    "@pdf/pdftext": "./pdftext.ts",
+    "@pdf/pdftxt": "./pdftxt.ts"
   }
 }
