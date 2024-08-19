@@ -48,7 +48,3 @@
 export {pdfText} from './pdftext.ts' ;
 export {test} from './test.ts' ;
 
-
-
-export {pdfText} from './pdftext.ts' ;
-export {test} from './test.ts' ;
