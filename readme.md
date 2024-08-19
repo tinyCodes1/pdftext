@@ -7,11 +7,11 @@
 
 @pdf/pdftext is a simple module to extract text from pdf. It uses [PDF.js](https://mozilla.github.io/pdf.js/). It can be executed in
 
-  - Command-line
-      i. Deno installed,
-      ii. Deno is not installed,
-  - Browser,
-  - Deno.
+  - Command-line  
+      i. Deno installed,  
+      ii. Deno is not installed,  
+  - Browser,  
+  - Deno.  
 
 ## Command-line :
 ### <u>i. Deno installed</u>
