@@ -8,7 +8,7 @@ import {pdfText} from './mod.ts' ;
  * Export function to check pdfText.
  */
 export const test = async () : Promise<string> => {
-  const response = await fetch("https://jsr.io/@pdf/pdftext/1.1.2/samplepdf/sample.pdf");
+  const response = await fetch("https://jsr.io/@pdf/pdftext/1.1.3/samplepdf/sample.pdf");
   const filedata : ArrayBuffer = await response.arrayBuffer();
   const pages = await pdfText(filedata);
   const page1 : string = pages[1] ;
