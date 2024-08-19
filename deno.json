@@ -1,14 +1,20 @@
 {
   "name": "@pdf/pdftext",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "exports": {
     ".": "./mod.ts",
     "./pdftext": "./pdftext.ts",
     "./test": "./test.ts",
     "./pdftxt": "./pdftxt.ts"
   },
-"imports": {
-    "@pdf/pdftext": "./pdftext.ts",
-    "@pdf/pdftxt": "./pdftxt.ts"
+  "dependencies": {
+    "@pdf/pdftext": "jsr:@pdftext"
+  },
+  "tasks" : {
+    "makeLinux" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-unknown-linux-gnu -o Dist/x86_64-linux/ pdftxt.ts",
+    "makeWindows" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-pc-windows-msvc -o Dist/x86_64-windows/ pdftxt.ts",
+    "makeApple" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-apple-darwin -o Dist/x86_64-apple/ pdftxt.ts",
+    "makeArm64" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=aarch64-unknown-linux-gnu -o Dist/ARM64/ pdftxt.ts",
+    "makeAll" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-unknown-linux-gnu -o Dist/x86_64-linux/ pdftxt.ts && deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-pc-windows-msvc -o Dist/x86_64-windows/ pdftxt.ts && deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-apple-darwin -o Dist/x86_64-apple/ pdftxt.ts && deno compile --allow-read --allow-write --allow-env --allow-net --target=aarch64-unknown-linux-gnu -o Dist/ARM64/ pdftxt.ts"
   }
 }
