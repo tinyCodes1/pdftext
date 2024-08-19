@@ -33,8 +33,8 @@ deno uninstall pdftxt
 
 2. Use
 
-***Windows***
-Click on pdftxt.exe directly *or*
+***Windows***  
+Click on pdftxt.exe directly *or*  
 Open command line in downloaded location.
 ```cmd
 .\pdftxt sample.pdf
@@ -66,7 +66,7 @@ const page = await pdfText(pdfBuffer);
 <input type="file" id="file-input" />
 ```
 
-## USAGE (Deno) :
+## Deno :
 ```typescript
 import {pdfText} from 'jsr:@pdf/pdftext';
 const pdfBuffer : ArrayBuffer = Deno.readFileSync("./path/to/pdf");
