@@ -11,7 +11,10 @@
     "@pdf/pdftext": "./mod.ts",
     "@pdf/pdftext/pdftxt": "./pdftxt.ts"
   },
-  "tasks" : {
+  "exclude" : [
+    "Dist/**"
+  ],
+"tasks" : {
     "makeLinux" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-unknown-linux-gnu -o Dist/x86_64-linux/ pdftxt.ts",
     "makeWindows" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-pc-windows-msvc -o Dist/x86_64-windows/ pdftxt.ts",
     "makeApple" : "deno compile --allow-read --allow-write --allow-env --allow-net --target=x86_64-apple-darwin -o Dist/x86_64-apple/ pdftxt.ts",
