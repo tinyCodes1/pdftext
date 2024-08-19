@@ -17,7 +17,7 @@
  * ## USAGE (Browser) :
  * 1. Download directly or using any utility like wget :
  * ```sh
- * wget https://jsr.io/@pdf/pdftext/1.1.2/src/pdftext.js
+ * wget https://jsr.io/@pdf/pdftext/1.1.1/src/pdftext.js
  * ```
  * 2. Minimum webpage
  * ```html
@@ -43,8 +43,12 @@
  * console.log(await test());
  * ```
  *
- * @module
  */
+
+export {pdfText} from './pdftext.ts' ;
+export {test} from './test.ts' ;
+
+
 
 export {pdfText} from './pdftext.ts' ;
 export {test} from './test.ts' ;
