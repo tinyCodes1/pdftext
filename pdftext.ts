@@ -2,6 +2,7 @@
  * pdftext file containing essential functions.
  * @module
  */
+
 import { getDocument, GlobalWorkerOptions } from "./src/pdf.mjs";
 import * as pdfWorker from "./src/pdf.worker.mjs";
 GlobalWorkerOptions.worker = pdfWorker;
@@ -33,19 +34,24 @@ const getPages=async(pdfDoc: PdfDocument): Promise<{[number: number]: string}>=>
       let currentLine = "";
       const lines : Array<string> = [];
       let lastY : number = 0;
-      const threshold = 5;
 
       const page = await pdfDoc.getPage(i);
       const content = await page.getTextContent();
-      content.items.forEach((item) => {
-        if (lastY == null || Math.abs(item.transform[5] - lastY) < threshold) {
+
+      const ObjItems = content.items.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
+      const ObjItems2 = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
+
+      for (const i in ObjItems2) {
+        const item = content.items[i];
+
+        if ((lastY == null) || (Math.abs(item.transform[5] - lastY) < item.transform[0]/2.5)) {
           currentLine += item.str + " " ;
         } else {
           lines.push(currentLine);
           currentLine = item.str;
         }
         lastY = item.transform[5];
-      });
+      }
       if (currentLine) {
         lines.push(currentLine);
       }
