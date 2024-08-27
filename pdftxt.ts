@@ -14,23 +14,34 @@ const showHelp=()=> {
   console.log(`pdftxt is simple commandline module to convert pdf file to text file.\n[${version}]\n`);
   console.log(`Usage: ${scriptName} <pdffiles>\n`);
   console.log(`Options:`);
-  console.log(`  -h  Show this help message.`);
+  console.log(`  -h   : Show this help message.`);
+  console.log(`  -n  :  Do not print page seperator line. Default is print seperator line.`);
+  console.log(`  -v   : Vertical sorting. better for tabular data.tabular data should be in left alignment. Default is horizontal sorting.`);
   Deno.exit(0);
 }
 
-const main = async(pdffile : string)=>{
+interface Config {
+  pdffile : string;
+  coord? : string;
+  pageLine? : boolean;
+}
 
+const main = async(config:Config)=>{
+  const {pdffile, coord="y", pageLine=true} = config;
   try {
-
     const pdfBuffer : ArrayBuffer = Deno.readFileSync(pdffile);
-    const pages : {[pageno:number]:string} = await pdfText(pdfBuffer);
+    const pages : {[pageno:number]:string} = await pdfText(pdfBuffer, coord);
     const pagetextArr : string[] = [];
     for ( const p in pages ) {
-      const pagetext = `--- page ${p} ---\n\n` + pages[p];
+      let pagetext = ``;
+      if (pageLine) {
+        pagetext += `--- page ${p} ---\n\n`;
+      }
+      pagetext += pages[p];
       pagetextArr.push(pagetext);
     }
     const outputFile = pdffile.replace(/\.pdf$/, `.txt`);
-    const alltext = pagetextArr.join(`\n\n\n`);
+    const alltext = pagetextArr.join(`\n\n`);
     try {
       const f = Deno.statSync(Deno.cwd() + SEPARATOR + outputFile);
       if (f.isFile) console.log(`"${outputFile}" already exist and will be overwritten.`);
@@ -40,26 +51,35 @@ const main = async(pdffile : string)=>{
     console.log(`output written to: ` + outputFile);
     Deno.writeTextFileSync(outputFile, alltext);
     prompt(`press enter to exit ...`);
-
   } catch (err) {
     if (err.name == `NotFound`) {
       console.log(`"${pdffile}" not found!`);
     }
   }
-
 }
 
 
 const args = Deno.args;
+let coord = "y";
+let pageLine = true;
 
 if (args.length === -1 || args.includes('-h') || args.includes('--help')) {
   showHelp();
+  Deno.exit();
+}
+
+if (args.includes(`-v`)) {
+  coord = "x";
+}
+
+if (args.includes(`-n`)) {
+  pageLine = false;
 }
 
 if (args.length == 0) {
   const input = prompt("Enter pdf file name: ");
   if (input != null) {
-    main(input);
+    main({pdffile:input, coord:coord, pageLine});
   }
 }
 
@@ -67,7 +87,7 @@ for (const arg in args) {
   const file = args[arg];
   if (file.endsWith(`.pdf`)) {
     console.log(`Processing : ${file} ...`);
-    main(file);
+    main({pdffile:file, coord:coord, pageLine});
   }
 }
 
