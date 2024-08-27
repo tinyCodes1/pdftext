@@ -7,16 +7,17 @@
 import {pdfText} from "./pdftext.ts";
 import { SEPARATOR } from "./src/sep.ts";
 
-const version = "1.1.7"
+const version = "1.1.8"
 const showHelp=()=> {
   const parts = Deno.mainModule.split(`/`);
   const scriptName = parts[parts.length -1];
   console.log(`pdftxt is simple commandline module to convert pdf file to text file.\n[${version}]\n`);
   console.log(`Usage: ${scriptName} <pdffiles>\n`);
   console.log(`Options:`);
-  console.log(`  -h   : Show this help message.`);
-  console.log(`  -n  :  Do not print page seperator line. Default is print seperator line.`);
-  console.log(`  -v   : Vertical sorting. better for tabular data.tabular data should be in left alignment. Default is horizontal sorting.`);
+  console.log(`  -h  : Show this help message.`);
+  console.log(`  -n  : Do not print page seperator line. Default is print seperator line.`);
+  console.log(`  -hs : Horizontal sorting. Default is none`);
+  console.log(`  -vs : Vertical sorting. better for tabular data.tabular data should be in left alignment. Default is none.`);
   Deno.exit(0);
 }
 
@@ -27,7 +28,7 @@ interface Config {
 }
 
 const main = async(config:Config)=>{
-  const {pdffile, coord="y", pageLine=true} = config;
+  const {pdffile, coord="none", pageLine=true} = config;
   try {
     const pdfBuffer : ArrayBuffer = Deno.readFileSync(pdffile);
     const pages : {[pageno:number]:string} = await pdfText(pdfBuffer, coord);
@@ -60,7 +61,7 @@ const main = async(config:Config)=>{
 
 
 const args = Deno.args;
-let coord = "y";
+let coord = "none";
 let pageLine = true;
 
 if (args.length === -1 || args.includes('-h') || args.includes('--help')) {
@@ -68,7 +69,10 @@ if (args.length === -1 || args.includes('-h') || args.includes('--help')) {
   Deno.exit();
 }
 
-if (args.includes(`-v`)) {
+if (args.includes(`-hs`)) {
+  coord = "y";
+}
+if (args.includes(`-vs`)) {
   coord = "x";
 }
 

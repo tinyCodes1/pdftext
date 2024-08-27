@@ -46,10 +46,10 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
       const content = await page.getTextContent();
 
       let ObjItems = content.items ;
-      if ( coord != "x" ) {
+      if ( coord == "y" ) {
         ObjItems = ObjItems.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
         ObjItems = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
-      } else {
+      } else if ( coord == "x" ) {
         ObjItems = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
         ObjItems = ObjItems.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
       }
@@ -82,7 +82,7 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
  * @param {ArrayBuffer} fileArray Array Buffer of pdf.
  * @returns {Promise<PdfTextJson>} returns pdf text data in json format to external.
  */
-export const pdfText = async(fileArray: ArrayBuffer, coord = "y"): Promise<{[number:number]:string }> => {
+export const pdfText = async(fileArray: ArrayBuffer, coord = "none"): Promise<{[number:number]:string }> => {
   const pdfTask = await getDocument(fileArray);
   const pdfDoc = await pdfTask.promise;
   const allPageJson = await getPages({pdfDoc, coord});
