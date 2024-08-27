@@ -6,13 +6,13 @@
 @pdf/pdftext is a simple module to extract text from pdf. It uses [PDF.js](https://mozilla.github.io/pdf.js/). It can be executed in
 
   - Command-line  
-      i. Deno installed,  
-      ii. Deno is not installed,  
+      i. With deno installed,  
+      ii. Without Deno installed,  
   - Browser,  
   - Deno.  
 
 # Command-line :
-## <u>i. Deno installed</u>
+## <u>i. With deno installed</u>
 1. Install / Update
 ```shell
 deno install -f -r --allow-read --allow-write --allow-net --allow-env jsr:@pdf/pdftext/pdftxt
@@ -26,7 +26,7 @@ pdftxt sample.pdf
 deno uninstall pdftxt
 ```
 
-## <u>ii. Deno not installed</u>
+## <u>ii. Without deno installed</u>
 1. Download appropriate version from [here](https://github.com/tinyCodes1/pdftext/tree/main/Dist).
 
 2. Use
