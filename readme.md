@@ -7,7 +7,7 @@
 
   - Command-line  
       i. With deno installed,  
-      ii. Without Deno installed,  
+      ii. Without deno installed,  
   - Browser,  
   - Deno.  
 

@@ -56,14 +56,14 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
 
       for (const i in ObjItems) {
         const item = content.items[i];
-          if ((lastY == null) || (Math.abs(item.transform[5] - lastY) < item.transform[0]/2.5)) {
-            currentLine += item.str + " " ;
-          } else {
-            lines.push(currentLine);
-            currentLine = item.str;
-          }
-          lastY = item.transform[5];
+        if ((lastY == null) || (Math.abs(item.transform[5] - lastY) < item.transform[0]/2.5)) {
+          currentLine += item.str + " " ;
+        } else {
+          lines.push(currentLine);
+          currentLine = item.str;
         }
+        lastY = item.transform[5];
+      }
       if (currentLine) {
         lines.push(currentLine);
       }
