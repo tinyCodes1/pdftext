@@ -15,7 +15,7 @@
 ## <u>i. With deno installed</u>
 1. Install / Update
 ```shell
-deno install -f -r --allow-read --allow-write --allow-net --allow-env jsr:@pdf/pdftext/pdftxt
+deno install -frgA jsr:@pdf/pdftext/pdftxt
 ```
 2. Now you can use it from command line
 ```shell
@@ -80,3 +80,11 @@ Typescript code for testing purpose.
 import {test} from 'jsr:@pdf/pdftext' ;
 console.log(await test());
 ```
+
+
+# License
+This project is licensed under the MIT License.  
+
+## Dependencies
+Some dependencies of this project may be licensed under different terms. In particular:  
+[PDF.js](https://mozilla.github.io/pdf.js/) is licensed under the Apache License 2.0.

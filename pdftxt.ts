@@ -7,7 +7,7 @@
 import {pdfText} from "./pdftext.ts";
 import { SEPARATOR } from "./src/sep.ts";
 
-const version = "1.1.8"
+const version = "1.1.9"
 const showHelp=()=> {
   const parts = Deno.mainModule.split(`/`);
   const scriptName = parts[parts.length -1];
@@ -53,8 +53,10 @@ const main = async(config:Config)=>{
     Deno.writeTextFileSync(outputFile, alltext);
     prompt(`press enter to exit ...`);
   } catch (err) {
-    if (err.name == `NotFound`) {
-      console.log(`"${pdffile}" not found!`);
+    if (err instanceof Error) {
+      if (err.name === `NotFound`) {
+        console.log(`"${pdffile}" not found!`);
+      }
     }
   }
 }
