@@ -3,9 +3,7 @@
  * @module
  */
 
-import { getDocument, GlobalWorkerOptions } from "./src/pdf.mjs";
-import * as pdfWorker from "./src/pdf.worker.mjs";
-GlobalWorkerOptions.worker = pdfWorker;
+import { getDocument } from "./src/pdf.js";
 
 interface Config {
   pdfDoc: PdfDocument;
@@ -17,6 +15,7 @@ interface PdfDocument {
 }
 interface PdfPage {
   getTextContent(): Promise<PdfTextContent>;
+  getAnnotations(): Promise<[]>;
 }
 interface PdfTextContent {
   items: PdfTextContentText[];
@@ -36,8 +35,10 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
 
   const { pdfDoc, coord } = config;
   const pagetext: {[key:number]:string} = {}  ;
+
   try {
     for (let i = 1; i <= pdfDoc.numPages; i++) {
+
       let currentLine = "";
       const lines : Array<string> = [];
       let lastY : number = 0;
@@ -55,7 +56,7 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
       }
 
       for (const i in ObjItems) {
-        const item = content.items[i];
+        const item = ObjItems[i];
         if ((lastY == null) || (Math.abs(item.transform[5] - lastY) < item.transform[0]/2.5)) {
           currentLine += item.str + " " ;
         } else {
@@ -72,7 +73,7 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
       pagetext[i] = allText.replace(/\n{3,}/g, '\n\n\n');    // remove more than 3 new lines
     }
   } catch (_error) {
-    console.log(`error while getting pdf text.`);
+    console.log(`error while getting pdf text. : ${_error}`);
   }
   return pagetext ;
 }
