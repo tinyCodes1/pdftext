@@ -3,7 +3,7 @@
  * @module
  */
 
-import { getDocument } from "./src/pdf.js";
+import { getDocument } from "./src/pdfjs.js";
 
 interface Config {
   pdfDoc: PdfDocument;
