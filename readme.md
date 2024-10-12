@@ -95,12 +95,13 @@ console.log(`Page 1 text: ${page[1]}`);
 
 <h2>Testing</h2>
 <p>For testing purposes, you can use the following TypeScript code:</p>
-<pre><code>import { test } from 'jsr:@pdf/pdftext';
+<pre><code>
+import { test } from 'jsr:@pdf/pdftext';
 console.log(await test());
 </code></pre>
 
 <h2>License</h2>
-<p>This project is licensed under the <a href="./LICENSE">MIT License</a>.</p>
+<p>This project is licensed under the <a href="./LICENSE/LICENSE.txt">MIT License</a>.</p>
 
 <h3>Dependencies</h3>
 <p>
