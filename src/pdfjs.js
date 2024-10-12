@@ -12163,7 +12163,7 @@ class PDFWorker {
     }
     _setupFakeWorker() {
         if (!PDFWorker.#isWorkerDisabled) {
-            warn("Setting up fake worker.");
+//            warn("Setting up fake worker.");
             PDFWorker.#isWorkerDisabled = true;
         }
         PDFWorker._setupFakeWorkerGlobal.then((WorkerMessageHandler)=>{

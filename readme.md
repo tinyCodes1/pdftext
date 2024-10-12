@@ -4,8 +4,10 @@
 <img src="https://jsr.io/badges/@pdf/pdftext" alt="JSR Badge" />
 </a>
 
-<p><strong>@pdf/pdftext</strong> is a lightweight module for extracting text from PDFs, built on 
-<a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. It can be used in various environments, including:</p>
+<p><strong>@pdf/pdftext</strong> is a lightweight module for 
+extracting text from PDFs, built on 
+<a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. It can be used in
+various environments, including:</p>
 
 <ul>
 <li><strong>Command-line</strong>
@@ -43,7 +45,7 @@
 <h3>ii. Without Deno Installed</h3>
 <ol>
 <li><strong>Download Executable:</strong> Download the appropriate version from the 
-<a href="https://github.com/tinyCodes1/pdftext/tree/main/Dist">releases page</a>.
+<a href="https://github.com/tinyCodes1/pdftext/releases">releases page</a>.
 </li>
 <li><strong>Usage:</strong>
 <ul>
@@ -61,7 +63,7 @@
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.0/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.1/src/pdftext.js</code></pre>
 </li>
 <li><strong>Minimal HTML Page Example:</strong>
 <pre><code>&lt;script type="module"&gt;
@@ -71,7 +73,7 @@ document.getElementById('file-input').addEventListener('change', async (event) =
 const file = event.target.files[0];
 const pdfBuffer = await file.arrayBuffer();
 const page = await pdfText(pdfBuffer);
-console.log(`Page 1: ${page[1]}`);
+console.log(\`Page 1: ${page[1]}\`);
 });
 &lt;/script&gt;
 
@@ -88,7 +90,7 @@ console.log(`Page 1: ${page[1]}`);
 const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
 const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 
-console.log(`Page 1 text: ${page[1]}`);
+console.log(\`Page 1 text: ${page[1]}\`);
 </code></pre>
 </li>
 </ul>
