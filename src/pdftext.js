@@ -107978,4 +107978,53 @@ const mod = {
     WorkerMessageHandler: __webpack_exports__WorkerMessageHandler
 };
 __webpack_exports__GlobalWorkerOptions.worker = mod;
-export { __webpack_exports__getDocument as getDocument };
+const getPages = async (config)=>{
+    const { pdfDoc, coord } = config;
+    const pagetext = {};
+    try {
+        for(let i = 1; i <= pdfDoc.numPages; i++){
+            let currentLine = "";
+            const lines = [];
+            let lastY = 0;
+            const page = await pdfDoc.getPage(i);
+            const content = await page.getTextContent();
+            let ObjItems = content.items;
+            if (coord == "y") {
+                ObjItems = ObjItems.sort((a, b)=>a.transform[4] - b.transform[4]);
+                ObjItems = ObjItems.sort((a, b)=>b.transform[5] - a.transform[5]);
+            } else if (coord == "x") {
+                ObjItems = ObjItems.sort((a, b)=>b.transform[5] - a.transform[5]);
+                ObjItems = ObjItems.sort((a, b)=>a.transform[4] - b.transform[4]);
+            }
+            for(const i in ObjItems){
+                const item = ObjItems[i];
+                if (lastY == null || Math.abs(item.transform[5] - lastY) < item.transform[0] / 2.5) {
+                    currentLine += item.str + " ";
+                } else {
+                    lines.push(currentLine);
+                    currentLine = item.str;
+                }
+                lastY = item.transform[5];
+            }
+            if (currentLine) {
+                lines.push(currentLine);
+            }
+            const lin = lines.map((line)=>line.trim().replace(/\s{2,}/g, " "));
+            const allText = lin.join("\n").trim();
+            pagetext[i] = allText.replace(/\n{3,}/g, '\n\n\n');
+        }
+    } catch (_error) {
+        console.log(`error while getting pdf text. : ${_error}`);
+    }
+    return pagetext;
+};
+const pdfText = async (fileArray, coord = "none")=>{
+    const pdfTask = await __webpack_exports__getDocument(fileArray);
+    const pdfDoc = await pdfTask.promise;
+    const allPageJson = await getPages({
+        pdfDoc,
+        coord
+    });
+    return allPageJson;
+};
+export { pdfText as pdfText };

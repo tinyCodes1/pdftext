@@ -1,0 +1,11 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@pdf/pdftext@*": "1.2.0"
+  },
+  "jsr": {
+    "@pdf/pdftext@1.2.0": {
+      "integrity": "fe87ad9dcb05b3dbeeaae7d4c029deb11c9c50a24fa270d5c1bf50f7a9a7543b"
+    }
+  }
+}
