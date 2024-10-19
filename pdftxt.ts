@@ -21,17 +21,11 @@ const showHelp=()=> {
   Deno.exit(0);
 }
 
-interface Config {
-  pdffile : string;
-  coord? : string;
-  pageLine? : boolean;
-}
 
-const main = async(config:Config)=>{
-  const {pdffile, coord="none", pageLine=true} = config;
+const main = async(pdffile:string, pageLine:boolean=true)=>{
   try {
     const pdfBuffer : ArrayBuffer = Deno.readFileSync(pdffile);
-    const pages : {[pageno:number]:string} = await pdfText(pdfBuffer, coord);
+    const pages : {[pageno:number]:string} = await pdfText(pdfBuffer);
     const pagetextArr : string[] = [];
     for ( const p in pages ) {
       let pagetext = ``;
@@ -63,19 +57,11 @@ const main = async(config:Config)=>{
 
 
 const args = Deno.args;
-let coord = "none";
 let pageLine = true;
 
 if (args.length === -1 || args.includes('-h') || args.includes('--help')) {
   showHelp();
   Deno.exit();
-}
-
-if (args.includes(`-hs`)) {
-  coord = "y";
-}
-if (args.includes(`-vs`)) {
-  coord = "x";
 }
 
 if (args.includes(`-n`)) {
@@ -85,7 +71,7 @@ if (args.includes(`-n`)) {
 if (args.length == 0) {
   const input = prompt("Enter pdf file name: ");
   if (input != null) {
-    main({pdffile:input, coord:coord, pageLine});
+    main(input, pageLine);
   }
 }
 
@@ -93,7 +79,7 @@ for (const arg in args) {
   const file = args[arg];
   if (file.endsWith(`.pdf`)) {
     console.log(`Processing : ${file} ...`);
-    main({pdffile:file, coord:coord, pageLine});
+    main(file, pageLine);
   }
 }
 
