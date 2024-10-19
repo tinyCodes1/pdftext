@@ -12163,7 +12163,6 @@ class PDFWorker {
     }
     _setupFakeWorker() {
         if (!PDFWorker.#isWorkerDisabled) {
-            warn("Setting up fake worker.");
             PDFWorker.#isWorkerDisabled = true;
         }
         PDFWorker._setupFakeWorkerGlobal.then((WorkerMessageHandler)=>{
@@ -107978,8 +107977,7 @@ const mod = {
     WorkerMessageHandler: __webpack_exports__WorkerMessageHandler
 };
 __webpack_exports__GlobalWorkerOptions.worker = mod;
-const getPages = async (config)=>{
-    const { pdfDoc, coord } = config;
+const getPages = async (pdfDoc)=>{
     const pagetext = {};
     try {
         for(let i = 1; i <= pdfDoc.numPages; i++){
@@ -107988,14 +107986,7 @@ const getPages = async (config)=>{
             let lastY = 0;
             const page = await pdfDoc.getPage(i);
             const content = await page.getTextContent();
-            let ObjItems = content.items;
-            if (coord == "y") {
-                ObjItems = ObjItems.sort((a, b)=>a.transform[4] - b.transform[4]);
-                ObjItems = ObjItems.sort((a, b)=>b.transform[5] - a.transform[5]);
-            } else if (coord == "x") {
-                ObjItems = ObjItems.sort((a, b)=>b.transform[5] - a.transform[5]);
-                ObjItems = ObjItems.sort((a, b)=>a.transform[4] - b.transform[4]);
-            }
+            const ObjItems = content.items;
             for(const i in ObjItems){
                 const item = ObjItems[i];
                 if (lastY == null || Math.abs(item.transform[5] - lastY) < item.transform[0] / 2.5) {
@@ -108018,13 +108009,11 @@ const getPages = async (config)=>{
     }
     return pagetext;
 };
-const pdfText = async (fileArray, coord = "none")=>{
+const pdfText = async (fileArray)=>{
     const pdfTask = await __webpack_exports__getDocument(fileArray);
     const pdfDoc = await pdfTask.promise;
-    const allPageJson = await getPages({
-        pdfDoc,
-        coord
-    });
-    return allPageJson;
+    const pageJson = await getPages(pdfDoc);
+    pageJson[0] = `${Object.values(pageJson)}`;
+    return pageJson;
 };
 export { pdfText as pdfText };
