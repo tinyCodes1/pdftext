@@ -41,7 +41,9 @@ const getPages=async(pdfDoc:PdfDocument): Promise<{[number: number]: string}>=>{
       const page = await pdfDoc.getPage(i);
       const content = await page.getTextContent();
 
-      const ObjItems = content.items ;
+      let ObjItems = content.items ;
+//      ObjItems = ObjItems.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
+      ObjItems = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
 
       for (const i in ObjItems) {
         const item = ObjItems[i];
@@ -77,8 +79,6 @@ export const pdfText = async(fileArray: ArrayBuffer): Promise<{[number:number]:s
   const pdfTask = await getDocument(fileArray);
   const pdfDoc = await pdfTask.promise;
   const pageJson = await getPages(pdfDoc);
-
   pageJson[0] =  `${Object.values(pageJson)}`;
-
   return pageJson;
 };
