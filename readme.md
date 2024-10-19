@@ -10,14 +10,14 @@ extracting text from PDFs, built on
 various environments, including:</p>
 
 <ul>
+<li><strong>Deno</strong></li>
+<li><strong>Browser</strong></li>
 <li><strong>Command-line</strong>
 <ul>
 <li>With Deno installed</li>
 <li>Without Deno installed</li>
 </ul>
 </li>
-<li><strong>Browser</strong></li>
-<li><strong>Deno</strong></li>
 </ul>
 
 <h2>Features</h2>
@@ -27,37 +27,24 @@ various environments, including:</p>
 <li>Cross-platform support for Windows, Linux, and macOS.</li>
 </ul>
 
-<h2>Command-Line Usage</h2>
-
-<h3>i. With Deno Installed</h3>
-<ol>
-<li><strong>Install or Update:</strong>
-<pre><code>deno install -frgA jsr:@pdf/pdftext/pdftxt</code></pre>
-</li>
-<li><strong>Usage:</strong> Extract text from a PDF:
-<pre><code>pdftxt sample.pdf</code></pre>
-</li>
-<li><strong>Uninstall:</strong> To remove the command-line tool:
-<pre><code>deno uninstall pdftxt</code></pre>
-</li>
-</ol>
-
-<h3>ii. Without Deno Installed</h3>
-<ol>
-<li><strong>Download Executable:</strong> Download the appropriate version from the 
-<a href="https://github.com/tinyCodes1/pdftext/releases">releases page</a>.
-</li>
-<li><strong>Usage:</strong>
+<h2>Deno Usage</h2>
 <ul>
-<li><strong>Windows:</strong>
-<pre><code>.\pdftxt sample.pdf</code></pre>
-</li>
-<li><strong>Linux:</strong>
-<pre><code>./pdftxt sample.pdf</code></pre>
+<li><strong>Import Module:</strong> Use the <code>@pdf/pdftext</code> module in Deno by importing it directly:
+<pre><code>import { pdfText } from 'jsr:@pdf/pdftext';
+
+const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
+const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
+
+// To get first page
+console.log(\`Page 1 text: ${page[1]}\`);
+
+// To get all page
+console.log(\`All page text: \n${page[0]}\`);
+
+
+</code></pre>
 </li>
 </ul>
-</li>
-</ol>
 
 <h2>Browser Usage</h2>
 <ol>
@@ -82,18 +69,38 @@ console.log(\`Page 1: ${page[1]}\`);
 </li>
 </ol>
 
-<h2>Deno Usage</h2>
+
+<h2>Command-Line Usage</h2>
+
+<h3>i. With Deno Installed</h3>
+<ol>
+<li><strong>Install or Update:</strong>
+<pre><code>deno install -frgA jsr:@pdf/pdftext/pdftxt</code></pre>
+</li>
+<li><strong>Usage:</strong> Extract text from a PDF:
+<pre><code>pdftxt sample.pdf</code></pre>
+</li>
+<li><strong>Uninstall:</strong> To remove the command-line tool:
+<pre><code>deno uninstall pdftxt</code></pre>
+</li>
+</ol>
+
+<h3>ii. Without Deno Installed</h3>
+<ol>
+<li><strong>Download Executable:</strong> Download the appropriate version from the 
+<a href="https://github.com/tinyCodes1/pdftext/releases">releases page</a>.
+</li>
+<li><strong>Usage:</strong>
 <ul>
-<li><strong>Import Module:</strong> Use the <code>@pdf/pdftext</code> module in Deno by importing it directly:
-<pre><code>import { pdfText } from 'jsr:@pdf/pdftext';
-
-const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
-const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
-
-console.log(\`Page 1 text: ${page[1]}\`);
-</code></pre>
+<li><strong>Windows:</strong>
+<pre><code>.\pdftxt.exe sample.pdf</code></pre>
+</li>
+<li><strong>Linux:</strong>
+<pre><code>./pdftxt sample.pdf</code></pre>
 </li>
 </ul>
+</li>
+</ol>
 
 <h2>Testing</h2>
 <p>For testing purposes, you can use the following TypeScript code:</p>

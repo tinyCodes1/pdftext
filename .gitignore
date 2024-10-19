@@ -5,6 +5,7 @@ example.pdf
 newtest.ts
 src/index.html
 Dist
+debug
 
 # Exclude configuration files
 # .editorconfig

@@ -5,10 +5,6 @@
 
 import { getDocument } from "./src/pdfjs.js";
 
-interface Config {
-  pdfDoc: PdfDocument;
-  coord?: string;
-}
 interface PdfDocument {
   numPages: number;
   getPage(pageNumber: number): Promise<PdfPage>;
@@ -31,9 +27,8 @@ interface PdfTextContentText {
  * @returns {Promise<PdfTextJson>} returns json text to pdfText function.
  */
 
-const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
+const getPages=async(pdfDoc:PdfDocument): Promise<{[number: number]: string}>=>{
 
-  const { pdfDoc, coord } = config;
   const pagetext: {[key:number]:string} = {}  ;
 
   try {
@@ -46,14 +41,7 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
       const page = await pdfDoc.getPage(i);
       const content = await page.getTextContent();
 
-      let ObjItems = content.items ;
-      if ( coord == "y" ) {
-        ObjItems = ObjItems.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
-        ObjItems = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
-      } else if ( coord == "x" ) {
-        ObjItems = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
-        ObjItems = ObjItems.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
-      }
+      const ObjItems = content.items ;
 
       for (const i in ObjItems) {
         const item = ObjItems[i];
@@ -78,14 +66,19 @@ const getPages=async(config : Config): Promise<{[number: number]: string}>=>{
   return pagetext ;
 }
 
+
+
 /**
  * Export function to get pdf data.
  * @param {ArrayBuffer} fileArray Array Buffer of pdf.
  * @returns {Promise<PdfTextJson>} returns pdf text data in json format to external.
  */
-export const pdfText = async(fileArray: ArrayBuffer, coord = "none"): Promise<{[number:number]:string }> => {
+export const pdfText = async(fileArray: ArrayBuffer): Promise<{[number:number]:string }> => {
   const pdfTask = await getDocument(fileArray);
   const pdfDoc = await pdfTask.promise;
-  const allPageJson = await getPages({pdfDoc, coord});
-  return allPageJson;
+  const pageJson = await getPages(pdfDoc);
+
+  pageJson[0] =  `${Object.values(pageJson)}`;
+
+  return pageJson;
 };
