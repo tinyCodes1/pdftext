@@ -16,8 +16,6 @@ const showHelp=()=> {
   console.log(`Options:`);
   console.log(`  -h  : Show this help message.`);
   console.log(`  -n  : Do not print page seperator line. Default is print seperator line.`);
-  console.log(`  -hs : Horizontal sorting. Default is none`);
-  console.log(`  -vs : Vertical sorting. better for tabular data.tabular data should be in left alignment. Default is none.`);
   Deno.exit(0);
 }
 
