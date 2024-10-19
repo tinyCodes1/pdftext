@@ -35,13 +35,11 @@ various environments, including:</p>
 const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
 const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 
-// To get first page
+// To get page 1
 console.log(\`Page 1 text: ${page[1]}\`);
 
 // To get all page
-console.log(\`All page text: \n${page[0]}\`);
-
-
+// console.log(\`All page text: \n${page[0]}\`);
 </code></pre>
 </li>
 </ul>
@@ -60,7 +58,12 @@ document.getElementById('file-input').addEventListener('change', async (event) =
 const file = event.target.files[0];
 const pdfBuffer = await file.arrayBuffer();
 const page = await pdfText(pdfBuffer);
+
+// To get page 1
 console.log(\`Page 1: ${page[1]}\`);
+
+// To get all page
+// console.log(\`All page: \n${page[0]}\`);
 });
 &lt;/script&gt;
 
