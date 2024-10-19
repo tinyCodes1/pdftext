@@ -48,7 +48,7 @@ console.log(\`Page 1 text: ${page[1]}\`);
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.2/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.3/src/pdftext.js</code></pre>
 </li>
 <li><strong>Minimal HTML Page Example:</strong>
 <pre><code>&lt;script type="module"&gt;
