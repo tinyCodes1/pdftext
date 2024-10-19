@@ -107986,7 +107986,8 @@ const getPages = async (pdfDoc)=>{
             let lastY = 0;
             const page = await pdfDoc.getPage(i);
             const content = await page.getTextContent();
-            const ObjItems = content.items;
+            let ObjItems = content.items;
+            ObjItems = ObjItems.sort((a, b)=>b.transform[5] - a.transform[5]);
             for(const i in ObjItems){
                 const item = ObjItems[i];
                 if (lastY == null || Math.abs(item.transform[5] - lastY) < item.transform[0] / 2.5) {
