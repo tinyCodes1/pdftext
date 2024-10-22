@@ -38,7 +38,7 @@ const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 // To get page 1
 console.log(\`Page 1 text: ${page[1]}\`);
 
-// To get all page
+// To get all pages
 // console.log(\`All page text: \n${page[0]}\`);
 </code></pre>
 </li>
@@ -48,7 +48,7 @@ console.log(\`Page 1 text: ${page[1]}\`);
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.4/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.5/src/pdftext.js</code></pre>
 </li>
 <li><strong>Minimal HTML Page Example:</strong>
 <pre><code>&lt;script type="module"&gt;
@@ -62,7 +62,7 @@ const page = await pdfText(pdfBuffer);
 // To get page 1
 console.log(\`Page 1: ${page[1]}\`);
 
-// To get all page
+// To get all pages
 // console.log(\`All page: \n${page[0]}\`);
 });
 &lt;/script&gt;
@@ -108,7 +108,7 @@ console.log(\`Page 1: ${page[1]}\`);
 <h2>Testing</h2>
 <p>For testing purposes, you can use the following TypeScript code:</p>
 <pre><code>
-import { test } from 'jsr:@pdf/pdftext';
+import { test } from "jsr:@pdf/pdftext";
 console.log(await test());
 </code></pre>
 

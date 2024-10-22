@@ -41,9 +41,7 @@ const getPages=async(pdfDoc:PdfDocument): Promise<{[number: number]: string}>=>{
       const page = await pdfDoc.getPage(i);
       const content = await page.getTextContent();
 
-      let ObjItems = content.items ;
-//      ObjItems = ObjItems.sort((a,b)=>a.transform[4] - b.transform[4]);  // sorted x coordinations
-      ObjItems = ObjItems.sort((a,b)=>b.transform[5] - a.transform[5]);  // sorted y coordinations
+      const ObjItems = content.items ;
 
       for (const i in ObjItems) {
         const item = ObjItems[i];
