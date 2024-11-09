@@ -78827,15 +78827,10 @@ class PartialEvaluator {
         }
         const standardFontNameToFileName = getFontNameToFileMap(), filename = standardFontNameToFileName[name];
         let data;
-        const fontError = [];
         if (this.options.standardFontDataUrl !== null) {
             const url = `${this.options.standardFontDataUrl}${filename}`;
             const response = await fetch(url);
             if (!response.ok) {
-                if ((url.includes(`FontData`)) && (!fontError.includes(url))) {
-                    warn1(`This font should be installed: ${url}`);
-                    fontError.push(url);
-                }
                 //  warn1(`fetchStandardFontData: failed to fetch file "${url}" with "${response.statusText}".`);
             } else {
                 data = new Uint8Array(await response.arrayBuffer());
@@ -78845,11 +78840,7 @@ class PartialEvaluator {
                 data = await this.handler.sendWithPromise("FetchStandardFontData", {
                     filename
                 });
-            } catch (e) {
-                if ((url.includes(`FontData`)) && (!fontError.includes(url))) {
-                    warn1(`This font should be installed: ${url}`);
-                    fontError.push(url);
-                }
+            } catch (_e) {
                 // warn1(`fetchStandardFontData: failed to fetch file "${filename}" with "${e}".`);
             }
         }
