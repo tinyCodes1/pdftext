@@ -60,8 +60,8 @@ const getPages=async(pdfDoc:PdfDocument): Promise<{[number: number]: string}>=>{
       const allText = lin.join("\n").trim();
       pagetext[i] = allText.replace(/\n{3,}/g, '\n\n\n');    // remove more than 3 new lines
     }
-  } catch (_error) {
-    console.log(`error while getting pdf text. : ${_error}`);
+  } catch (error) {
+    console.log(`error while getting pdf text. : ${error}`);
   }
   return pagetext ;
 }

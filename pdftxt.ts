@@ -7,7 +7,7 @@
 import {pdfText} from "./pdftext.ts";
 import { SEPARATOR } from "./src/sep.ts";
 
-const version = "1.2.5"
+const version = "1.2.6"
 const showHelp=()=> {
   const parts = Deno.mainModule.split(`/`);
   const scriptName = parts[parts.length -1];
@@ -39,6 +39,7 @@ const main = async(pdffile:string, pageLine:boolean=true)=>{
       const f = Deno.statSync(Deno.cwd() + SEPARATOR + outputFile);
       if (f.isFile) console.log(`"${outputFile}" already exist and will be overwritten.`);
     } catch (_err) {
+      console.error(`output file "${outputFile}" not found!`);
       // outputFile not exist.
     }
     console.log(`output written to: ` + outputFile);
@@ -47,7 +48,7 @@ const main = async(pdffile:string, pageLine:boolean=true)=>{
   } catch (err) {
     if (err instanceof Error) {
       if (err.name === `NotFound`) {
-        console.log(`"${pdffile}" not found!`);
+        console.error(`"${pdffile}" not found!`);
       }
     }
   }

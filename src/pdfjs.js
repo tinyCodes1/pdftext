@@ -78801,7 +78801,7 @@ class PartialEvaluator {
             const url = `${this.options.cMapUrl}${name}.bcmap`;
             const response = await fetch(url);
             if (!response.ok) {
-                throw new Error(`fetchBuiltInCMap: failed to fetch file "${url}" with "${response.statusText}".`);
+                                throw new Error(`fetchBuiltInCMap: failed to fetch file "${url}" with "${response.statusText}".`);
             }
             data = {
                 cMapData: new Uint8Array(await response.arrayBuffer()),
@@ -78827,11 +78827,16 @@ class PartialEvaluator {
         }
         const standardFontNameToFileName = getFontNameToFileMap(), filename = standardFontNameToFileName[name];
         let data;
+        const fontError = [];
         if (this.options.standardFontDataUrl !== null) {
             const url = `${this.options.standardFontDataUrl}${filename}`;
             const response = await fetch(url);
             if (!response.ok) {
-                warn1(`fetchStandardFontData: failed to fetch file "${url}" with "${response.statusText}".`);
+                if ((url.includes(`FontData`)) && (!fontError.includes(url))) {
+                    warn1(`This font should be installed: ${url}`);
+                    fontError.push(url);
+                }
+                //  warn1(`fetchStandardFontData: failed to fetch file "${url}" with "${response.statusText}".`);
             } else {
                 data = new Uint8Array(await response.arrayBuffer());
             }
@@ -78841,7 +78846,11 @@ class PartialEvaluator {
                     filename
                 });
             } catch (e) {
-                warn1(`fetchStandardFontData: failed to fetch file "${filename}" with "${e}".`);
+                if ((url.includes(`FontData`)) && (!fontError.includes(url))) {
+                    warn1(`This font should be installed: ${url}`);
+                    fontError.push(url);
+                }
+                // warn1(`fetchStandardFontData: failed to fetch file "${filename}" with "${e}".`);
             }
         }
         if (!data) {

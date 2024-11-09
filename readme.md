@@ -22,14 +22,12 @@ various environments, including:</p>
 
 <h2>Features</h2>
 <ul>
-<li>Easy to use for command-line, browser, and Deno.</li>
+<li>Easy to use for deno, browser, and command-line.</li>
 <li>PDF text extraction with minimal configuration.</li>
 <li>Cross-platform support for Windows, Linux, and macOS.</li>
 </ul>
 
 <h2>Deno Usage</h2>
-<ul>
-<li><strong>Import Module:</strong> Use the <code>@pdf/pdftext</code> module in Deno by importing it directly:
 <pre><code>import { pdfText } from 'jsr:@pdf/pdftext';
 
 const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
@@ -41,16 +39,14 @@ console.log(\`Page 1 text: ${page[1]}\`);
 // To get all pages
 // console.log(\`All page text: \n${page[0]}\`);
 </code></pre>
-</li>
-</ul>
 
 <h2>Browser Usage</h2>
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.5/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.6/src/pdftext.js</code></pre>
 </li>
-<li><strong>Minimal HTML Page Example:</strong>
+<li><strong>Minimal HTML Page :</strong>
 <pre><code>&lt;script type="module"&gt;
 import { pdfText } from './pdftext.js';
 
@@ -106,7 +102,7 @@ console.log(\`Page 1: ${page[1]}\`);
 </ol>
 
 <h2>Testing</h2>
-<p>For testing purposes, you can use the following TypeScript code:</p>
+<p>Typescript code for testing purposes :</p>
 <pre><code>
 import { test } from "jsr:@pdf/pdftext";
 console.log(await test());
