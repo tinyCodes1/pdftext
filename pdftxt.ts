@@ -7,7 +7,7 @@
 import {pdfText} from "./pdftext.ts";
 import { SEPARATOR } from "./src/sep.ts";
 
-const version = "1.2.8"
+const version = "1.2.9"
 const showHelp=()=> {
   const parts = Deno.mainModule.split(`/`);
   const scriptName = parts[parts.length -1];
@@ -25,6 +25,7 @@ const main = async(pdffile:string, pageLine:boolean=true)=>{
     const pdfBuffer : ArrayBuffer = Deno.readFileSync(pdffile);
     const pages : {[pageno:number]:string} = await pdfText(pdfBuffer);
     const pagetextArr : string[] = [];
+    delete pagetextArr[0];
     for ( const p in pages ) {
       let pagetext = ``;
       if (pageLine) {

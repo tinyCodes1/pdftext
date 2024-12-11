@@ -69,9 +69,9 @@ const getPages=async(pdfDoc:PdfDocument): Promise<{[number: number]: string}>=>{
 
 
 /**
- * Export function to get pdf data.
+ * function to get pdf data.
  * @param {ArrayBuffer} fileArray Array Buffer of pdf.
- * @returns {Promise<PdfTextJson>} returns pdf text data in json format to external.
+ * @returns {Promise<{[number:number]:string}>} returns pdf text data in json format to external.
  */
 export const pdfText = async(fileArray: ArrayBuffer): Promise<{[number:number]:string }> => {
   const pdfTask = await getDocument(fileArray);
@@ -80,3 +80,4 @@ export const pdfText = async(fileArray: ArrayBuffer): Promise<{[number:number]:s
   pageJson[0] =  `${Object.values(pageJson)}`;
   return pageJson;
 };
+

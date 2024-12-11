@@ -33,18 +33,20 @@ various environments, including:</p>
 const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
 const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 
-// To get page 1
-console.log(\`Page 1 text: ${page[1]}\`);
-
 // To get all pages
 // console.log(\`All page text: \n${page[0]}\`);
+
+// To get page 1
+// delete page[0];
+// console.log(\`Page 1 text: ${page[1]}\`);
+
 </code></pre>
 
 <h2>Browser Usage</h2>
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.8/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.2.9/src/pdftext.js</code></pre>
 </li>
 <li><strong>Minimal HTML Page :</strong>
 <pre><code>&lt;script type="module"&gt;
@@ -55,11 +57,13 @@ const file = event.target.files[0];
 const pdfBuffer = await file.arrayBuffer();
 const page = await pdfText(pdfBuffer);
 
-// To get page 1
-console.log(\`Page 1: ${page[1]}\`);
-
 // To get all pages
 // console.log(\`All page: \n${page[0]}\`);
+
+// To get page 1
+// delete page[0];
+// console.log(\`Page 1: ${page[1]}\`);
+
 });
 &lt;/script&gt;
 
@@ -109,10 +113,7 @@ console.log(await test());
 </code></pre>
 
 <h2>License</h2>
-<p>This project is licensed under the <a href="./LICENSE/LICENSE.txt">MIT License</a>.</p>
+<p>This project is licensed under the <a href="./LICENSES/LICENSE.txt">MIT License</a>.</p>
 
 <h3>Dependencies</h3>
-<p>
-Some dependencies of this project may be licensed under different terms. In particular, 
-<a href="https://mozilla.github.io/pdf.js/">PDF.js</a> is licensed under the Apache License 2.0.
-</p>
+<p> Some dependencies of this project may be licensed under different terms.</p>

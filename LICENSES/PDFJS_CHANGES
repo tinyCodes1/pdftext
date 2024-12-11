@@ -1,0 +1,5 @@
+Following changes are made in pdfjs :
+
+1. Bundled pdfjs dist files to single file
+2. Bundled pdfjs in custom script i.e pdftxt.js
+3. Suppressed some warning outputs in console
