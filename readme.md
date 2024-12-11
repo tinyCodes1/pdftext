@@ -46,7 +46,7 @@ const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.3.0/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.3.1/src/pdftext.js</code></pre>
 </li>
 <li><strong>Minimal HTML Page :</strong>
 <pre><code>&lt;script type="module"&gt;
