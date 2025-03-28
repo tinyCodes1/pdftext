@@ -12225,8 +12225,12 @@ class PDFWorker {
             if (this.#mainThreadWorkerMessageHandler) {
                 return this.#mainThreadWorkerMessageHandler;
             }
+            try {
             const worker = await import(this.workerSrc);
             return worker.WorkerMessageHandler;
+            } catch (err){
+                console.error(`Error in setting workers: ${err}`)
+            }
         };
         return shadow(this, "_setupFakeWorkerGlobal", loader());
     }

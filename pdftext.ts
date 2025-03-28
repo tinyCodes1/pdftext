@@ -3,7 +3,7 @@
   * @module
 */
 
-import { expect } from "jsr:@std/expect";
+import { expect } from "jsr:@std/expect@1.0.14";
 import { getDocument } from "./src/pdfjs.js";
 
 interface PdfDocument {
