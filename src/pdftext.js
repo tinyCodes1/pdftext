@@ -107973,31 +107973,36 @@ const mod = {
     WorkerMessageHandler: __webpack_exports__WorkerMessageHandler
 };
 __webpack_exports__GlobalWorkerOptions.worker = mod;
+const getPlainTexts = async (page)=>{
+    let currentLine = "";
+    const lines = [];
+    let lastY = 0;
+    const content = await page.getTextContent();
+    const ObjItems = content.items;
+    for(const i in ObjItems){
+        const item = ObjItems[i];
+        if (lastY == null || Math.abs(item.transform[5] - lastY) < item.transform[0] / 2.5) {
+            currentLine += item.str + " ";
+        } else {
+            lines.push(currentLine);
+            currentLine = item.str;
+        }
+        lastY = item.transform[5];
+    }
+    if (currentLine) {
+        lines.push(currentLine);
+    }
+    const lin = lines.map((line)=>line.trim().replace(/\s{2,}/g, " "));
+    const allText = lin.join("\n").trim();
+    return allText;
+};
 const getPages = async (pdfDoc)=>{
     const pagetext = {};
     try {
         for(let i = 1; i <= pdfDoc.numPages; i++){
-            let currentLine = "";
-            const lines = [];
-            let lastY = 0;
             const page = await pdfDoc.getPage(i);
-            const content = await page.getTextContent();
-            const ObjItems = content.items;
-            for(const i in ObjItems){
-                const item = ObjItems[i];
-                if (lastY == null || Math.abs(item.transform[5] - lastY) < item.transform[0] / 2.5) {
-                    currentLine += item.str + " ";
-                } else {
-                    lines.push(currentLine);
-                    currentLine = item.str;
-                }
-                lastY = item.transform[5];
-            }
-            if (currentLine) {
-                lines.push(currentLine);
-            }
-            const lin = lines.map((line)=>line.trim().replace(/\s{2,}/g, " "));
-            const allText = lin.join("\n").trim();
+            let allText = ``;
+            allText = await getPlainTexts(page);
             pagetext[i] = allText.replace(/\n{3,}/g, '\n\n\n');
         }
     } catch (error) {
@@ -108009,83 +108014,6 @@ const pdfText = async (fileArray)=>{
     const pdfTask = await __webpack_exports__getDocument(fileArray);
     const pdfDoc = await pdfTask.promise;
     const pageJson = await getPages(pdfDoc);
-    pageJson[0] = `${Object.values(pageJson)}`;
     return pageJson;
 };
-const osType = (()=>{
-    const { Deno: Deno1 } = globalThis;
-    if (typeof Deno1?.build?.os === "string") {
-        return Deno1.build.os;
-    }
-    if (navigator?.appVersion?.includes?.("Win")) {
-        return "windows";
-    }
-    return "linux";
-})();
-const isWindows = osType === "windows";
-const SEPARATOR = isWindows ? "\\" : "/";
-const version1 = "1.2.7";
-const showHelp = ()=>{
-    const parts = Deno.mainModule.split(`/`);
-    const scriptName = parts[parts.length - 1];
-    console.log(`pdftxt is simple commandline module to convert pdf file to text file.\n[${version1}]\n`);
-    console.log(`Usage: ${scriptName} <pdffiles>\n`);
-    console.log(`Options:`);
-    console.log(`  -h  : Show this help message.`);
-    console.log(`  -n  : Do not print page seperator line. Default is print seperator line.`);
-    Deno.exit(0);
-};
-const main = async (pdffile, pageLine = true)=>{
-    try {
-        const pdfBuffer = Deno.readFileSync(pdffile);
-        const pages = await pdfText(pdfBuffer);
-        const pagetextArr = [];
-        for(const p in pages){
-            let pagetext = ``;
-            if (pageLine) {
-                pagetext += `--- page ${p} ---\n\n`;
-            }
-            pagetext += pages[p];
-            pagetextArr.push(pagetext);
-        }
-        const outputFile = pdffile.replace(/\.pdf$/, `.txt`);
-        const alltext = pagetextArr.join(`\n\n`);
-        try {
-            const f = Deno.statSync(Deno.cwd() + SEPARATOR + outputFile);
-            if (f.isFile) console.log(`"${outputFile}" already exist and will be overwritten.`);
-        } catch (_err) {
-            console.error(`output file "${outputFile}" not found!`);
-        }
-        console.log(`output written to: ` + outputFile);
-        Deno.writeTextFileSync(outputFile, alltext);
-        prompt(`press enter to exit ...`);
-    } catch (err) {
-        if (err instanceof Error) {
-            if (err.name === `NotFound`) {
-                console.error(`"${pdffile}" not found!`);
-            }
-        }
-    }
-};
-const args = Deno.args;
-let pageLine = true;
-if (args.length === -1 || args.includes('-h') || args.includes('--help')) {
-    showHelp();
-    Deno.exit();
-}
-if (args.includes(`-n`)) {
-    pageLine = false;
-}
-if (args.length == 0) {
-    const input = prompt("Enter pdf file name: ");
-    if (input != null) {
-        main(input, pageLine);
-    }
-}
-for(const arg in args){
-    const file = args[arg];
-    if (file.endsWith(`.pdf`)) {
-        console.log(`Processing : ${file} ...`);
-        main(file, pageLine);
-    }
-}
+export { pdfText as pdfText };

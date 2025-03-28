@@ -1,0 +1,101 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/assert@^1.0.12": "1.0.12",
+    "jsr:@std/expect@*": "1.0.14",
+    "jsr:@std/internal@^1.0.6": "1.0.6",
+    "npm:tesseract.js@*": "6.0.0"
+  },
+  "jsr": {
+    "@std/assert@1.0.12": {
+      "integrity": "08009f0926dda9cbd8bef3a35d3b6a4b964b0ab5c3e140a4e0351fbf34af5b9a",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/expect@1.0.14": {
+      "integrity": "27b8200267c97206e38050aff18badc82e73b3072c1a6bdd59393ddea6f69183",
+      "dependencies": [
+        "jsr:@std/assert",
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/internal@1.0.6": {
+      "integrity": "9533b128f230f73bd209408bb07a4b12f8d4255ab2a4d22a1fd6d87304aca9a4"
+    }
+  },
+  "npm": {
+    "bmp-js@0.1.0": {
+      "integrity": "sha512-vHdS19CnY3hwiNdkaqk93DvjVLfbEcI8mys4UjuWrlX1haDmroo8o4xCzh4wD6DGV6HxRCyauwhHRqMTfERtjw=="
+    },
+    "idb-keyval@6.2.1": {
+      "integrity": "sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg=="
+    },
+    "is-url@1.2.4": {
+      "integrity": "sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww=="
+    },
+    "node-fetch@2.7.0": {
+      "integrity": "sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==",
+      "dependencies": [
+        "whatwg-url"
+      ]
+    },
+    "opencollective-postinstall@2.0.3": {
+      "integrity": "sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q=="
+    },
+    "regenerator-runtime@0.13.11": {
+      "integrity": "sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg=="
+    },
+    "tesseract.js-core@6.0.0": {
+      "integrity": "sha512-1Qncm/9oKM7xgrQXZXNB+NRh19qiXGhxlrR8EwFbK5SaUbPZnS5OMtP/ghtqfd23hsr1ZvZbZjeuAGcMxd/ooA=="
+    },
+    "tesseract.js@6.0.0": {
+      "integrity": "sha512-tqYCod1HwJzkeZw1l6XWx+ly2hhisGcBtak9MArhYwDAxL0NgeVhLJcUjqPxZMQtpgtVUzWcpZPryi+hnaQGVw==",
+      "dependencies": [
+        "bmp-js",
+        "idb-keyval",
+        "is-url",
+        "node-fetch",
+        "opencollective-postinstall",
+        "regenerator-runtime",
+        "tesseract.js-core",
+        "wasm-feature-detect",
+        "zlibjs"
+      ]
+    },
+    "tr46@0.0.3": {
+      "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw=="
+    },
+    "wasm-feature-detect@1.8.0": {
+      "integrity": "sha512-zksaLKM2fVlnB5jQQDqKXXwYHLQUVH9es+5TOOHwGOVJOCeRBCiPjwSg+3tN2AdTCzjgli4jijCH290kXb/zWQ=="
+    },
+    "webidl-conversions@3.0.1": {
+      "integrity": "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ=="
+    },
+    "whatwg-url@5.0.0": {
+      "integrity": "sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==",
+      "dependencies": [
+        "tr46",
+        "webidl-conversions"
+      ]
+    },
+    "zlibjs@0.3.1": {
+      "integrity": "sha512-+J9RrgTKOmlxFSDHo0pI1xM6BLVUv+o0ZT9ANtCxGkjIVCCUdx9alUF8Gm+dGLKbkkkidWIHFDZHDMpfITt4+w=="
+    }
+  },
+  "redirects": {
+    "https://deno.land/x/canvas/mod.ts": "https://deno.land/x/canvas@v1.4.2/mod.ts"
+  },
+  "remote": {
+    "https://deno.land/std@0.106.0/encoding/base64.ts": "eecae390f1f1d1cae6f6c6d732ede5276bf4b9cd29b1d281678c054dc5cc009e",
+    "https://deno.land/x/canvas@v1.4.2/deps.ts": "e956026d98094946166e06d7b799290b732db015813870d84e04e33ab88e98f3",
+    "https://deno.land/x/canvas@v1.4.2/mod.ts": "a4e16972647ceafef58612a377a218372454c99d2c9da615a132694597114f80",
+    "https://deno.land/x/canvas@v1.4.2/src/base64.ts": "0928031fdba0c43b617154fbe2eb7578366460c04da1422933ae5e936d3d0349",
+    "https://deno.land/x/canvas@v1.4.2/src/canvas.ts": "58119999b04f68ebeed2627485c5c24c5b0c029707edde0b6568814f9049a3a8",
+    "https://deno.land/x/canvas@v1.4.2/src/canvaskit.ts": "c3d807472cbb3e1d9fc01bb43ff974ef796c4b010178d1595be5fa793cce5e7d",
+    "https://deno.land/x/canvas@v1.4.2/src/color_util.ts": "28f1072f0a5acbe7add7fac2f452311a47b44c080806fc4057de2d2e405c6c1c",
+    "https://deno.land/x/canvas@v1.4.2/src/lib.js": "55c4064064870313439dd7ef5297374cb0cbed2dc815bd064c3ace6e067753b0",
+    "https://deno.land/x/canvas@v1.4.2/src/types.ts": "67d5800f8f4b0a407e0251676a03ae91b5f50a3ed53e6b72dc5984113cb93128",
+    "https://deno.land/x/canvas@v1.4.2/src/wasm.js": "449d72cc14fc4142a5853f944df49a744d852981d09c5515528ede8aebb0afda"
+  }
+}

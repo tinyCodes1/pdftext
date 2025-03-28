@@ -1,3 +1,9 @@
+<div style="padding: 5px; font-weight:bold"> [EXPERIMENTAL] </div>
+<div style="padding: 5px"> - Always use with version number </div>
+
+<br/>
+
+
 <h1>@pdf/pdftext - Simple PDF Text Extraction Module</h1>
 
 <a href="https://jsr.io/@pdf/pdftext">
@@ -28,16 +34,12 @@ various environments, including:</p>
 </ul>
 
 <h2>Deno Usage</h2>
-<pre><code>import { pdfText } from 'jsr:@pdf/pdftext';
+<pre><code>import { pdfText } from 'jsr:@pdf/pdftext@1.3.2';
 
-const pdfBuffer: ArrayBuffer = Deno.readFileSync('./path/to/pdf');
+const pdfBuffer = Deno.readFileSync('./path/to/pdf');
 const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 
-// To get all pages
-// console.log(\`All page text: \n${page[0]}\`);
-
 // To get page 1
-// delete page[0];
 // console.log(\`Page 1 text: ${page[1]}\`);
 
 </code></pre>
@@ -46,7 +48,7 @@ const page: { [pageno: number]: string } = await pdfText(pdfBuffer);
 <ol>
 <li><strong>Download Module:</strong> Download the <code>pdftext.js</code> module using 
 <code>curl</code> or a similar utility:
-<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.3.1/src/pdftext.js</code></pre>
+<pre><code>curl -L -O -C- https://jsr.io/@pdf/pdftext/1.3.2/src/pdftext.js</code></pre>
 </li>
 <li><strong>Minimal HTML Page :</strong>
 <pre><code>&lt;script type="module"&gt;
@@ -55,13 +57,9 @@ import { pdfText } from './pdftext.js';
 document.getElementById('file-input').addEventListener('change', async (event) =&gt; {
 const file = event.target.files[0];
 const pdfBuffer = await file.arrayBuffer();
-const page = await pdfText(pdfBuffer);
-
-// To get all pages
-// console.log(\`All page: \n${page[0]}\`);
+const page = await pdfText(new Uint8Array(pdfBuffer));
 
 // To get page 1
-// delete page[0];
 // console.log(\`Page 1: ${page[1]}\`);
 
 });
@@ -78,7 +76,7 @@ const page = await pdfText(pdfBuffer);
 <h3>i. With Deno Installed</h3>
 <ol>
 <li><strong>Install or Update:</strong>
-<pre><code>deno install -frgA jsr:@pdf/pdftext/pdftxt</code></pre>
+<pre><code>deno install -frgA jsr:@pdf/pdftext@1.3.2/pdftxt -n pdftxt</code></pre>
 </li>
 <li><strong>Usage:</strong> Extract text from a PDF:
 <pre><code>pdftxt sample.pdf</code></pre>
@@ -116,4 +114,4 @@ console.log(await test());
 <p>This project is licensed under the <a href="./LICENSES/LICENSE.txt">MIT License</a>.</p>
 
 <h3>Dependencies</h3>
-<p> Some dependencies of this project may be licensed under different terms.</p>
+<p> Some dependencies of this project may be licensed under different terms. (see <a href="./LICENSES">LICENSES</a> for more details)</p>

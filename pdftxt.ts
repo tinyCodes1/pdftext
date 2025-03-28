@@ -1,13 +1,13 @@
 #!/usr/bin/env -S deno run --ext=ts --allow-write --allow-read
 
 /**
- *  pdftxt : simple module to convert pdf to text file. It is intended to run from terminal/cmd directly.
- */
+  *  pdftxt : simple module to convert pdf to text file. It is intended to run from terminal/cmd directly.
+  */
 
 import {pdfText} from "./pdftext.ts";
 import { SEPARATOR } from "./src/sep.ts";
 
-const version = "1.3.1"
+const version = "1.3.2"
 const showHelp=()=> {
   const parts = Deno.mainModule.split(`/`);
   const scriptName = parts[parts.length -1];
@@ -22,9 +22,8 @@ const showHelp=()=> {
 
 const main = async(pdffile:string, pageLine:boolean=true)=>{
   try {
-    const pdfBuffer : ArrayBuffer = Deno.readFileSync(pdffile);
+    const pdfBuffer : Uint8Array = Deno.readFileSync(pdffile);
     const pages : {[pageno:number]:string} = await pdfText(pdfBuffer);
-    delete pages[0];
     const pagetextArr : string[] = [];
     for ( const p in pages ) {
       let pagetext = ``;
@@ -40,8 +39,8 @@ const main = async(pdffile:string, pageLine:boolean=true)=>{
       const f = Deno.statSync(Deno.cwd() + SEPARATOR + outputFile);
       if (f.isFile) console.log(`"${outputFile}" already exist and will be overwritten.`);
     } catch (_err) {
-     // console.error(`output file "${outputFile}" not found!`);
       // outputFile not exist.
+      // console.error(`output file "${outputFile}" not found!`);
     }
     console.log(`output written to: ` + outputFile);
     Deno.writeTextFileSync(outputFile, alltext);
